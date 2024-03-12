@@ -1,6 +1,6 @@
 package com.pumpkinmarket.domain.user.application;
 
-import com.pumpkinmarket.components.JwtTokenProvider;
+import com.pumpkinmarket.components.TokenProvider;
 import com.pumpkinmarket.constants.UserJwtClaim;
 import com.pumpkinmarket.domain.user.domain.User;
 import com.pumpkinmarket.domain.user.dto.UserSignInDto;
@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final TokenProvider tokenProvider;
 
     @Transactional
     public Long createUser(UserSignupDto.UserSignupReq requestBody) {
@@ -54,7 +54,7 @@ public class UserService {
         }
 
         return new UserSignInDto.UserSignInRes(
-            this.jwtTokenProvider.createToken(new UserJwtClaim(user.getId()))
+            this.tokenProvider.createToken(new UserJwtClaim(user.getId()))
         );
     }
 }

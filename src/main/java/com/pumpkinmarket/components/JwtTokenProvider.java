@@ -3,7 +3,6 @@ package com.pumpkinmarket.components;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pumpkinmarket.constants.IJwtClaim;
-import com.pumpkinmarket.constants.UserJwtClaim;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -17,7 +16,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
 import java.util.Date;
 
 @Component
@@ -40,11 +38,10 @@ public class JwtTokenProvider implements TokenProvider {
                 .compact();
     }
 
-    public String createToken(IJwtClaim jwtClaim) {
-        return this.createToken(jwtClaim, Duration.ofHours(1).toMillis());
-    }
-
-    public UserJwtClaim decodeJwt(String jwtToken) {
+    public <T extends IJwtClaim> T decodeJwt(
+            String jwtToken,
+            Class<T> tClass
+    ) {
         final ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -55,7 +52,7 @@ public class JwtTokenProvider implements TokenProvider {
                     .parseSignedClaims(jwtToken)
                     .getPayload();
 
-            return objectMapper.convertValue(claims, UserJwtClaim.class);
+            return objectMapper.convertValue(claims, tClass);
         } catch (ExpiredJwtException exception) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
