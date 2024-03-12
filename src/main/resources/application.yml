@@ -15,3 +15,6 @@ spring:
   devtools:
     restart:
       enabled: true
+
+jwt:
+  secretKey: asdfjh2k3j4h3k12jhsadfhoh13asdfjh2k3j4h3k12jhsadfhoh12
