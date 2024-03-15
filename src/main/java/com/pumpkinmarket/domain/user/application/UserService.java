@@ -1,7 +1,7 @@
 package com.pumpkinmarket.domain.user.application;
 
 import com.pumpkinmarket.components.TokenProvider;
-import com.pumpkinmarket.constants.UserJwtClaim;
+import com.pumpkinmarket.constants.UserTokenClaim;
 import com.pumpkinmarket.domain.user.domain.User;
 import com.pumpkinmarket.domain.user.dto.UserSignInDto;
 import com.pumpkinmarket.domain.user.dto.UserSignupDto;
@@ -55,7 +55,7 @@ public class UserService {
         }
 
         return new UserSignInDto.UserSignInRes(
-            this.tokenProvider.createToken(new UserJwtClaim(user.getId()))
+            this.tokenProvider.createToken(new UserTokenClaim(user.getId()))
         );
     }
 }

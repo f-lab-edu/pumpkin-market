@@ -1,6 +1,8 @@
 package com.pumpkinmarket.domain.user.api;
 
+import com.pumpkinmarket.annotations.AuthUser;
 import com.pumpkinmarket.domain.user.application.UserService;
+import com.pumpkinmarket.domain.user.dto.UserDetailDto;
 import com.pumpkinmarket.domain.user.dto.UserSignInDto;
 import com.pumpkinmarket.domain.user.dto.UserSignupDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Tags(@Tag(name = "User"))
-public class UserController {
+public final class UserController {
     private final UserService userService;
 
     @PostMapping("sign-up")
@@ -31,5 +33,12 @@ public class UserController {
             @Valid() @RequestBody UserSignInDto.UserSignInReq requestBody
     ) {
         return this.userService.signIn(requestBody.email(), requestBody.password());
+    }
+
+    @GetMapping("me")
+    @AuthUser
+    @ResponseStatus(HttpStatus.OK)
+    public UserDetailDto.UserDetailRes getMyDetail() {
+        return null;
     }
 }
