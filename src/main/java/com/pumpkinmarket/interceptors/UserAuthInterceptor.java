@@ -33,9 +33,12 @@ public class UserAuthInterceptor implements HandlerInterceptor {
             @NonNull Object handler
     ) {
         final var handlerMethod = (HandlerMethod) handler;
-        final var annotation = handlerMethod.getMethodAnnotation(AuthUser.class);
 
-        if (annotation != null) {
+        final boolean isExistsAnnotation =
+                handlerMethod.getMethod().getAnnotation(AuthUser.class) != null ||
+                handlerMethod.getBeanType().getAnnotation(AuthUser.class) != null;
+
+        if (isExistsAnnotation) {
             final var accessToken = Optional.ofNullable(request.getHeader(accessTokenHeader))
                     .map((header) -> header.substring(tokenType.length() + 1))
                     .orElseThrow(() -> BusinessException.of(CommonErrorCode.UNAUTHORIZED_ERROR));

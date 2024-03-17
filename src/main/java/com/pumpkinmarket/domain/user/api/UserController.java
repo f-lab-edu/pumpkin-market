@@ -1,10 +1,12 @@
 package com.pumpkinmarket.domain.user.api;
 
 import com.pumpkinmarket.annotations.AuthUser;
+import com.pumpkinmarket.constants.UserTokenClaim;
 import com.pumpkinmarket.domain.user.application.UserService;
 import com.pumpkinmarket.domain.user.dto.UserDetailDto;
 import com.pumpkinmarket.domain.user.dto.UserSignInDto;
 import com.pumpkinmarket.domain.user.dto.UserSignupDto;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import jakarta.validation.Valid;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
+@AuthUser
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Tags(@Tag(name = "User"))
@@ -36,9 +39,11 @@ public final class UserController {
     }
 
     @GetMapping("me")
-    @AuthUser
+    @SecurityRequirement(name = "Authorization-HTTP")
     @ResponseStatus(HttpStatus.OK)
-    public UserDetailDto.UserDetailRes getMyDetail() {
+    public UserDetailDto.UserDetailRes getMyDetail(UserTokenClaim user) {
+        System.out.println("user" + user);
+        System.out.println("user" + user.id());
         return null;
     }
 }
