@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController()
-@AuthUser
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Tags(@Tag(name = "User"))
@@ -39,9 +38,12 @@ public final class UserController {
     }
 
     @GetMapping("me")
+    @AuthUser
     @SecurityRequirement(name = "Authorization-HTTP")
     @ResponseStatus(HttpStatus.OK)
-    public UserDetailDto.UserDetailRes getMyDetail(UserTokenClaim user) {
+    public UserDetailDto.UserDetailRes getMyDetail(
+            UserTokenClaim user
+    ) {
         System.out.println("user" + user);
         System.out.println("user" + user.id());
         return null;
