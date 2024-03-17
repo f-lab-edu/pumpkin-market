@@ -1,7 +1,6 @@
 package com.pumpkinmarket.config;
 
 import com.pumpkinmarket.components.DecoderTokenProvider;
-import com.pumpkinmarket.components.TokenProvider;
 import com.pumpkinmarket.interceptors.UserAuthInterceptor;
 import com.pumpkinmarket.resolvers.UserArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
