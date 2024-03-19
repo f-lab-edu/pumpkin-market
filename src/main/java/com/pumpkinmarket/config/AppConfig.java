@@ -13,7 +13,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class AppConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        final int bCryptStrength = 12;
+        return new BCryptPasswordEncoder(bCryptStrength);
     }
 
     @Bean
