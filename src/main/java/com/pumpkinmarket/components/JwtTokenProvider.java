@@ -21,10 +21,15 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider implements TokenProvider {
     private final SecretKey secretKey;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public JwtTokenProvider(@Value("${jwt.secretKey}") String secretKey) {
+    public JwtTokenProvider(
+            @Value("${jwt.secretKey}") String secretKey,
+            ObjectMapper objectMapper
+    ) {
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -42,9 +47,6 @@ public class JwtTokenProvider implements TokenProvider {
             String jwtToken,
             Class<T> tClass
     ) {
-        final ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         try {
             final Claims claims = Jwts.parser()
                     .verifyWith(this.secretKey)
