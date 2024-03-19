@@ -3,6 +3,7 @@ package com.pumpkinmarket.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.pumpkinmarket.constants.BCryptStrength;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,8 +14,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 public class AppConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
-        final int bCryptStrength = 12;
-        return new BCryptPasswordEncoder(bCryptStrength);
+        return new BCryptPasswordEncoder(BCryptStrength.MEDIUM.getStrength());
     }
 
     @Bean
