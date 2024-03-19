@@ -20,8 +20,6 @@ import java.util.Collection;
 public class HttpExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<HttpErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("handleMethodArgumentNotValidException", e);
-
         final HttpErrorResponse response = HttpErrorResponse.of(
                 CommonErrorCode.VALIDATION_ERROR,
                 e.getBindingResult()
@@ -32,8 +30,6 @@ public class HttpExceptionHandler {
 
     @ExceptionHandler(HandlerMethodValidationException.class)
     protected ResponseEntity<HttpErrorResponse> handlerMethodValidationException(HandlerMethodValidationException e) {
-        log.error("handlerMethodValidationException", e);
-
         final HttpErrorResponse response = HttpErrorResponse.of(
                 CommonErrorCode.VALIDATION_ERROR,
                 String.join(",", e.getAllValidationResults().stream().map(ParameterValidationResult::getResolvableErrors)
@@ -47,8 +43,6 @@ public class HttpExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<HttpErrorResponse> handleBusinessException(BusinessException e) {
-        log.error("handleBusinessException", e);
-
         final HttpErrorResponse response = HttpErrorResponse.of(e.getErrorCode(), e.getMessage());
 
         return new ResponseEntity<>(response, HttpStatusCode.valueOf(response.getHttpStatus()));

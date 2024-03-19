@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public final class UserController {
     private final UserService userService;
 
-    @PostMapping("sign-up")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public void createUser(
         @Valid() @RequestBody UserSignupDto.UserSignupReq requestBody
