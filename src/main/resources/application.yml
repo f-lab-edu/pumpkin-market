@@ -1,4 +1,20 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pumpkin_market
+    username: app
+    password: app
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      format_sql: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   devtools:
     restart:
       enabled: true
+
+jwt:
+  secretKey: asdfjh2k3j4h3k12jhsadfhoh13asdfjh2k3j4h3k12jhsadfhoh12
