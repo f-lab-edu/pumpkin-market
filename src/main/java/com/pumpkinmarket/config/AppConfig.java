@@ -1,5 +1,7 @@
 package com.pumpkinmarket.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,5 +24,13 @@ public class AppConfig {
     @Bean
     public jakarta.validation.Validator defaultValidator() {
         return new LocalValidatorFactoryBean();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        return objectMapper;
     }
 }
