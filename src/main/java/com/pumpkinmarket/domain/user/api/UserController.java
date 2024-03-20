@@ -44,8 +44,6 @@ public final class UserController {
     public UserDetailDto.UserDetailRes getMyDetail(
             UserTokenClaim user
     ) {
-        System.out.println("user" + user);
-        System.out.println("user" + user.id());
-        return null;
+        return this.userService.getUserDetail(user.id());
     }
 }

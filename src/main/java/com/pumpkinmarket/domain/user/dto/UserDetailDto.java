@@ -12,6 +12,5 @@ public class UserDetailDto {
         @Schema(description = "핸드폰 번호", requiredMode = Schema.RequiredMode.REQUIRED)
         String phone
     ) {
-
     }
 }
