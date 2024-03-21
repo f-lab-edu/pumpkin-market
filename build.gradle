@@ -25,6 +25,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.security:spring-security-crypto'
 
+	implementation group: 'org.hibernate.orm', name: 'hibernate-spatial', version: '6.4.4.Final'
+
 
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.3.0'
