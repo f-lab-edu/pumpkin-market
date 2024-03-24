@@ -7,7 +7,19 @@ import lombok.NoArgsConstructor;
 import org.locationtech.jts.geom.MultiPolygon;
 
 @Entity
-@Table(name = "towns")
+@Table(
+        name = "towns",
+        indexes = {
+                @Index(
+                        name="coordinates_index",
+                        columnList="coordinates"
+                ),
+                @Index(
+                        name="code_index",
+                        columnList="code"
+                )
+        }
+)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Town {
@@ -21,6 +33,6 @@ public class Town {
     @Column(nullable = false, name = "town_name")
     private String townName;
 
-    @Column(name = "coordinates", nullable = false)
+    @Column(name = "coordinates", columnDefinition = "geometry NOT NULL SRID 4326")
     private MultiPolygon coordinates;
 }
