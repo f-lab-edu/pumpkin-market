@@ -1,5 +1,6 @@
 package com.pumpkinmarket.domain.user.domain;
 
+import com.pumpkinmarket.domain.common.domain.AbstractAuditingEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AccessLevel;
@@ -11,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class User {
+public class User extends AbstractAuditingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

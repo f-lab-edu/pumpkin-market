@@ -1,5 +1,6 @@
-package com.pumpkinmarket.domain.location.town;
+package com.pumpkinmarket.domain.town;
 
+import com.pumpkinmarket.domain.common.domain.AbstractAuditingEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,7 +23,7 @@ import org.locationtech.jts.geom.MultiPolygon;
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Town {
+public class Town extends AbstractAuditingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
