@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Serializable;
 import java.util.Map;
 
-public interface IJwtClaim extends Serializable {
+public interface ITokenClaim extends Serializable {
     @SuppressWarnings("unchecked")
     default Map<String, ?> toMap() {
         ObjectMapper objectMapper = new ObjectMapper();

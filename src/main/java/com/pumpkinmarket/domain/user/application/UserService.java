@@ -1,8 +1,9 @@
 package com.pumpkinmarket.domain.user.application;
 
 import com.pumpkinmarket.components.TokenProvider;
-import com.pumpkinmarket.constants.UserJwtClaim;
+import com.pumpkinmarket.constants.UserTokenClaim;
 import com.pumpkinmarket.domain.user.domain.User;
+import com.pumpkinmarket.domain.user.dto.UserDetailDto;
 import com.pumpkinmarket.domain.user.dto.UserSignInDto;
 import com.pumpkinmarket.domain.user.dto.UserSignupDto;
 import com.pumpkinmarket.domain.user.repository.UserRepository;
@@ -55,7 +56,18 @@ public class UserService {
         }
 
         return new UserSignInDto.UserSignInRes(
-            this.tokenProvider.createToken(new UserJwtClaim(user.getId()))
+            this.tokenProvider.createToken(new UserTokenClaim(user.getId()))
+        );
+    }
+
+    public UserDetailDto.UserDetailRes getUserDetail(Long userId) {
+        final var user = this.userRepository.findById(userId)
+                .orElseThrow(() -> BusinessException.of(UserErrorCode.NOT_FOUND_USER));
+
+        return new UserDetailDto.UserDetailRes(
+                user.getId(),
+                user.getNickname(),
+                user.getPhone()
         );
     }
 }

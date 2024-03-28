@@ -9,6 +9,11 @@ public enum UserErrorCode implements ErrorCode {
             "ALREADY_EXISTS_USER",
             "이미 존재하는 유저입니다.",
             HttpStatus.CONFLICT.value()
+    ),
+    NOT_FOUND_USER(
+            "NOT_FOUND_USER",
+            "존재하지 않는 유저입니다.",
+            HttpStatus.NOT_FOUND.value()
     );
 
     private final int httpStatus;
