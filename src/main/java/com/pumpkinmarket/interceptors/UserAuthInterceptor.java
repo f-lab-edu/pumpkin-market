@@ -35,8 +35,8 @@ public class UserAuthInterceptor implements HandlerInterceptor {
         final var handlerMethod = (HandlerMethod) handler;
 
         final boolean isExistsAnnotation =
-                handlerMethod.getMethod().getAnnotation(AuthUser.class) != null ||
-                handlerMethod.getBeanType().getAnnotation(AuthUser.class) != null;
+                handlerMethod.getMethod().isAnnotationPresent(AuthUser.class) ||
+                handlerMethod.getBeanType().isAnnotationPresent(AuthUser.class);
 
         if (isExistsAnnotation) {
             final var accessToken = Optional.ofNullable(request.getHeader(HttpHeaders.AUTHORIZATION))

@@ -32,7 +32,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         );
 
         if (user == null) {
-            log.info("UserTokenClaim null");
+            log.error("UserTokenClaim null");
             throw BusinessException.of(CommonErrorCode.UNKNOWN_ERROR);
         }
 
